@@ -8,8 +8,12 @@
   <body>
     <h1>Latihan</h1>
 
-    <div id="barChart" style="width: 600px; height: 600px"></div>
-    <div id="pieChart" style="width: 600px; height: 600px"></div>
+    <ul>
+      <li>Buat bar chart dengan data baru</li>
+      <div id="barChart" style="width: 1000px; height: 600px"></div>
+      <li>Buat pie chart dengan data baru</li>
+      <div id="pieChart" style="width: 600px; height: 600px"></div>
+    </ul>
 
     <script src="https://cdn.jsdelivr.net/npm/flotr2@0.1.0/flotr2.min.js"></script>
     <script text="text/javascript">
@@ -42,7 +46,7 @@
         ];
 
         Flotr.draw(document.getElementById("barChart"), dataBar, {
-          title: "Penjualan Mobil Listrik di Indoensia",
+          title: "Penjualan Mobil Listrik di Indonesia",
           bars: {
             show: true,
             barWidth: 0.5,

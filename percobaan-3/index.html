@@ -29,9 +29,10 @@
         }
 
         var zero = [];
-        for (yr = 1959; yr < 2024; yr++) {
+        for (yr = startYear; yr < currentYear; yr++) {
           zero.push([yr, 0]);
         }
+
         Flotr.draw(
           document.getElementById("chart"),
           [
