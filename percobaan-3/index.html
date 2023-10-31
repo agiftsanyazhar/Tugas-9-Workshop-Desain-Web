@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="chart" style="width: 600px; height: 400px"></div>
+
+    <script src="https://cdn.jsdelivr.net/npm/flotr2@0.1.0/flotr2.min.js"></script>
+    <script text="text/javascript">
+      window.onload = function () {
+        const startYear = 1959;
+        const currentYear = new Date().getFullYear();
+
+        function getRandomNumber(min, max) {
+          return Math.random() * (max - min) + min;
+        }
+
+        const co2 = [];
+        const temp = [];
+
+        for (let year = startYear; year <= currentYear; year++) {
+          co2.push([year, getRandomNumber(300, 700)]);
+          temp.push([year, getRandomNumber(0.02, 0.2)]);
+        }
+
+        var zero = [];
+        for (yr = 2020; yr < 2021; yr++) {
+          zero.push([yr, 0]);
+        }
+        Flotr.draw(
+          document.getElementById("chart"),
+          [
+            {
+              data: zero,
+              label: "20<sup>th</sup> Century Baseline Temperature",
+              lines: {
+                show: true,
+                lineWidth: 1,
+              },
+              shadowSize: 0,
+              color: "#545454",
+            },
+            {
+              data: temp,
+              label: "Yearly Temperature Difference (&#8451;)",
+              lines: { show: true },
+            },
+            {
+              data: co2,
+              label: "CO<sub>2</sub> Concertation (ppm)",
+              lines: { show: true },
+              yaxis: 2,
+            },
+          ],
+          {
+            title:
+              "Global Temperature and CO<sub>2</sub> Concertation (NOAA Data)",
+            grid: { horizontalLines: false, verticalLines: false },
+            y2axis: { min: 0, max: 1000 },
+            yaxis: {
+              min: 0,
+              max: 0.5,
+              tickFormatter: function (val) {
+                return val + " &#8451;";
+              },
+            },
+          }
+        );
+      };
+    </script>
+  </body>
+</html>
