@@ -6,6 +6,8 @@
     <title>Document</title>
   </head>
   <body>
+    <h1>Percobaan 3: Visualisasi Data - Line Chart</h1>
+
     <div id="chart" style="width: 600px; height: 400px"></div>
 
     <script src="https://cdn.jsdelivr.net/npm/flotr2@0.1.0/flotr2.min.js"></script>
@@ -27,7 +29,7 @@
         }
 
         var zero = [];
-        for (yr = 2020; yr < 2021; yr++) {
+        for (yr = 1959; yr < 2024; yr++) {
           zero.push([yr, 0]);
         }
         Flotr.draw(
@@ -61,7 +63,7 @@
             grid: { horizontalLines: false, verticalLines: false },
             y2axis: { min: 0, max: 1000 },
             yaxis: {
-              min: 0,
+              min: -0.1,
               max: 0.5,
               tickFormatter: function (val) {
                 return val + " &#8451;";

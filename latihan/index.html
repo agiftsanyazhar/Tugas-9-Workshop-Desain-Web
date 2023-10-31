@@ -4,60 +4,92 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-
-    <script language="javascript" type="text/javascript">
-      function getArea(r) {
-        return Math.PI * r * r;
-      }
-      function getKeliling(r) {
-        return 2 * Math.PI * r;
-      }
-      function getVolume(r) {
-        return r * r * r;
-      }
-    </script>
   </head>
   <body>
-    <h1>Latihan: Keliling dan Luas Lingkaran, Volume Kubus</h1>
+    <h1>Latihan</h1>
 
-    <h3>Keliling Lingkaran dan Luas Lingkaran</h3>
+    <div id="barChart" style="width: 600px; height: 600px"></div>
+    <div id="pieChart" style="width: 600px; height: 600px"></div>
 
-    <form>
-      Enter radius, then press tab key or click on "area" box.<br />
-      radius (cm):
-      <input
-        type="text"
-        name="radius"
-        size="6"
-        maxlength="7"
-        onblur="circumference.value=getKeliling(parseFloat(radius.value));"
-      />
-      circumference (cm):
-      <input type="text" name="circumference" size="6" maxlength="7" />
-      area (cm<sup>2</sup>):
-      <input
-        type="text"
-        name="area"
-        size="6"
-        maxlength="7"
-        onblur="area.value=getArea(parseFloat(radius.value));"
-      />
-    </form>
+    <script src="https://cdn.jsdelivr.net/npm/flotr2@0.1.0/flotr2.min.js"></script>
+    <script text="text/javascript">
+      window.onload = function () {
+        var dataBar = [
+          {
+            data: [
+              [0, Math.random() * 500, "Januari"],
+              [1, Math.random() * 500, "Februari"],
+              [2, Math.random() * 500, "Maret"],
+              [3, Math.random() * 500, "April"],
+              [4, Math.random() * 500, "Mei"],
+              [5, Math.random() * 500, "Juni"],
+              [6, Math.random() * 500, "Juli"],
+              [7, Math.random() * 500, "Agustus"],
+              [8, Math.random() * 500, "September"],
+              [9, Math.random() * 500, "Oktober"],
+              [10, Math.random() * 500, "November"],
+              [11, Math.random() * 500, "Desember"],
+            ],
+          },
+        ];
 
-    <h3>Volume Kubus</h3>
+        var dataPie = [
+          { data: [[0, Math.random() * 10]], label: "Papua" },
+          { data: [[1, Math.random() * 10]], label: "Kalimantan" },
+          { data: [[2, Math.random() * 10]], label: "Sumatera" },
+          { data: [[3, Math.random() * 10]], label: "Sulawesi" },
+          { data: [[4, Math.random() * 10]], label: "Jawa" },
+        ];
 
-    <form>
-      Enter height, then press tab key or click on "volume" box.<br />
-      height (cm):
-      <input
-        type="text"
-        name="radius"
-        size="6"
-        maxlength="7"
-        onblur="volume.value=getVolume(parseFloat(radius.value));"
-      />
-      volume (cm<sup>3</sup>):
-      <input type="text" name="volume" size="6" maxlength="7" />
-    </form>
+        Flotr.draw(document.getElementById("barChart"), dataBar, {
+          title: "Penjualan Mobil Listrik di Indoensia",
+          bars: {
+            show: true,
+            barWidth: 0.5,
+          },
+          xaxis: {
+            ticks: [
+              [0, "Januari"],
+              [1, "Februari"],
+              [2, "Maret"],
+              [3, "April"],
+              [4, "Mei"],
+              [5, "Juni"],
+              [6, "Juli"],
+              [7, "Agustus"],
+              [8, "September"],
+              [9, "Oktober"],
+              [10, "November"],
+              [11, "Desember"],
+            ],
+          },
+          yaxis: {
+            min: 0,
+          },
+          HtmlText: true,
+          mouse: {
+            track: true,
+            trackFormatter: function (point, opts) {
+              var content =
+                "Bulan: " +
+                point.series.data[point.index][2] +
+                "<br>Terjual: " +
+                point.y;
+              return content;
+            },
+          },
+        });
+
+        Flotr.draw(document.getElementById("pieChart"), dataPie, {
+          title: "Asal Mahasiswa Pens",
+          pie: {
+            show: true,
+          },
+          yaxis: { showLabels: false },
+          xaxis: { showLabels: false },
+          grid: { horizontalLines: false, verticalLines: false },
+        });
+      };
+    </script>
   </body>
 </html>

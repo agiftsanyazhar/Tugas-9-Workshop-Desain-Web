@@ -3,20 +3,245 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Get Calibration Constant</title>
-    <script language="javascript">
-      document.write(
-        "This document last modified on " + document.lastModified + "."
-      );
-    </script>
+    <title>Document</title>
   </head>
   <body>
-    <h1>Tugas: Melihat Data Kalibrasi</h1>
-    <h2>Get calibration statistics</h2>
-    <form action="get-calib.php" method="post">
-      Enter station here:
-      <input type="text" name="station" value="C11_181" /><br />
-      <input type="submit" value="Get calibration statistics" />
-    </form>
+    <h1>Tugas</h1>
+
+    <div id="chart" style="width: 600px; height: 600px"></div>
+
+    <input type="checkbox" id="meja" name="meja" value="meja" checked="true" />
+    <label for="meja"> Meja </label><br />
+    <input type="checkbox" id="kursi" name="kursi" value="kursi" />
+    <label for="kursi"> Kursi </label><br />
+    <input type="checkbox" id="lemari" name="lemari" value="lemari" />
+    <label for="lemari"> Lemari </label><br />
+    <input type="checkbox" id="piring" name="piring" value="piring" />
+    <label for="piring"> Piring </label><br />
+    <input type="checkbox" id="garpu" name="garpu" value="garpu" />
+    <label for="garpu"> Garpu </label><br />
+    <input type="checkbox" id="sendok" name="sendok" value="sendok" />
+    <label for="sendok"> Sendok </label><br />
+
+    <script src="https://cdn.jsdelivr.net/npm/flotr2@0.1.0/flotr2.min.js"></script>
+    <script
+      type="text/javascript"
+      src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"
+    ></script>
+    <script text="text/javascript">
+      window.onload = function () {
+        meja = {
+          data: [
+            [0, Math.random() * 500, "Januari"],
+            [1, Math.random() * 500, "Februari"],
+            [2, Math.random() * 500, "Maret"],
+            [3, Math.random() * 500, "April"],
+            [4, Math.random() * 500, "Mei"],
+            [5, Math.random() * 500, "Juni"],
+          ],
+          lines: {
+            show: true,
+            lineWidth: 2,
+          },
+          points: {
+            show: true,
+            radius: 4,
+          },
+          label: "Meja",
+        };
+
+        kursi = {
+          data: [
+            [0, Math.random() * 500, "Januari"],
+            [1, Math.random() * 500, "Februari"],
+            [2, Math.random() * 500, "Maret"],
+            [3, Math.random() * 500, "April"],
+            [4, Math.random() * 500, "Mei"],
+            [5, Math.random() * 500, "Juni"],
+          ],
+          lines: {
+            show: true,
+            lineWidth: 2,
+          },
+          points: {
+            show: true,
+            radius: 4,
+          },
+          label: "Kursi",
+        };
+
+        lemari = {
+          data: [
+            [0, Math.random() * 500, "Januari"],
+            [1, Math.random() * 500, "Februari"],
+            [2, Math.random() * 500, "Maret"],
+            [3, Math.random() * 500, "April"],
+            [4, Math.random() * 500, "Mei"],
+            [5, Math.random() * 500, "Juni"],
+          ],
+          lines: {
+            show: true,
+            lineWidth: 2,
+          },
+          points: {
+            show: true,
+            radius: 4,
+          },
+          label: "Lemari",
+        };
+
+        piring = {
+          data: [
+            [0, Math.random() * 500, "Januari"],
+            [1, Math.random() * 500, "Februari"],
+            [2, Math.random() * 500, "Maret"],
+            [3, Math.random() * 500, "April"],
+            [4, Math.random() * 500, "Mei"],
+            [5, Math.random() * 500, "Juni"],
+          ],
+          lines: {
+            show: true,
+            lineWidth: 2,
+          },
+          points: {
+            show: true,
+            radius: 4,
+          },
+          label: "Piring",
+        };
+
+        garpu = {
+          data: [
+            [0, Math.random() * 500, "Januari"],
+            [1, Math.random() * 500, "Februari"],
+            [2, Math.random() * 500, "Maret"],
+            [3, Math.random() * 500, "April"],
+            [4, Math.random() * 500, "Mei"],
+            [5, Math.random() * 500, "Juni"],
+          ],
+          lines: {
+            show: true,
+            lineWidth: 2,
+          },
+          points: {
+            show: true,
+            radius: 4,
+          },
+          label: "Garpu",
+        };
+
+        sendok = {
+          data: [
+            [0, Math.random() * 500, "Januari"],
+            [1, Math.random() * 500, "Februari"],
+            [2, Math.random() * 500, "Maret"],
+            [3, Math.random() * 500, "April"],
+            [4, Math.random() * 500, "Mei"],
+            [5, Math.random() * 500, "Juni"],
+          ],
+          lines: {
+            show: true,
+            lineWidth: 2,
+          },
+          points: {
+            show: true,
+            radius: 4,
+          },
+          label: "Sendok",
+        };
+
+        var data = [meja, {}, {}, {}, {}, {}];
+
+        drawChart(data);
+
+        $("#meja").click(function (e) {
+          if ($(this).is(":checked")) {
+            data[0] = meja;
+          } else {
+            data[0] = {};
+          }
+          drawChart(data);
+        });
+
+        $("#kursi").click(function (e) {
+          if ($(this).is(":checked")) {
+            data[1] = kursi;
+          } else {
+            data[1] = {};
+          }
+          drawChart(data);
+        });
+
+        $("#lemari").click(function (e) {
+          if ($(this).is(":checked")) {
+            data[2] = lemari;
+          } else {
+            data[2] = {};
+          }
+          drawChart(data);
+        });
+
+        $("#piring").click(function (e) {
+          if ($(this).is(":checked")) {
+            data[3] = piring;
+          } else {
+            data[3] = {};
+          }
+          drawChart(data);
+        });
+
+        $("#sendok").click(function (e) {
+          if ($(this).is(":checked")) {
+            data[4] = sendok;
+          } else {
+            data[4] = {};
+          }
+          drawChart(data);
+        });
+
+        $("#garpu").click(function (e) {
+          if ($(this).is(":checked")) {
+            data[5] = garpu;
+          } else {
+            data[5] = {};
+          }
+          drawChart(data);
+        });
+      };
+
+      function drawChart(data) {
+        const months = ["Januari", "Februari", "Maret", "April", "Mei", "Juni"];
+
+        Flotr.draw(document.getElementById("chart"), data, {
+          title: "Data Penjualan Toko Depan",
+          xaxis: {
+            ticks: [
+              [0, "Januari"],
+              [1, "Februari"],
+              [2, "Maret"],
+              [3, "April"],
+              [4, "Mei"],
+              [5, "Juni"],
+            ],
+          },
+          yaxis: {
+            min: 0,
+          },
+          HtmlText: true,
+          mouse: {
+            track: true,
+            relative: true,
+            trackFormatter: function (point, opts) {
+              var content =
+                "Bulan: " +
+                point.series.data[point.index][2] +
+                "<br>Terjual: " +
+                point.y;
+              return content;
+            },
+          },
+        });
+      }
+    </script>
   </body>
 </html>
